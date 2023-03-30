@@ -1,0 +1,211 @@
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NUMBERATES</title>
+    <style>
+        body{
+    background:linear-gradient(45deg,pink,rgba(255, 166, 0, 0.507))
+}
+.a{
+    background-color: white;
+    text-align: center;
+    
+    
+}
+#title{
+    color:white;
+    text-align: center;
+}
+#attemptLabel{
+    color:white;
+    font-size: xx-large;
+    position:absolute;
+    right:0px;
+    top:0px;
+    background-color: rgb(255, 196, 217);
+
+}
+#attemptCount{
+    position:absolute;
+    right:0px;
+    top:50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  input[type="number"] {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  button {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background-color: #0077CC;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #005AA3;
+  }
+    </style>
+</head>
+<body>
+    <label>...</label>
+    <button id="attemptLabel">NO OF ATTEMPTS</button>
+    <button id="attemptCount">ATTEMPT COUNT</button>
+
+    <h1 id="title"><u>NUMBERATES</u></h1>
+    <div class="a" position="center">
+    <h1 id="heading">Guess The Number Between 1-100</h1>
+    <br>
+<div class="container">
+    <div class="form">
+    <p id="textLabel">Enter the number: </p>
+    <input type="text" id="textBox">
+    <img id="checkButton"><button id="Checkbtn">Check</button>
+    </div>
+    </div>
+</div>
+    <script>
+         // Generate a random number between 1 and 100
+const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+// Function to check the user's guess
+function check() {
+  // Get the user's guess from the input field
+  const userGuess = parseInt(document.getElementById("textBox").value);
+
+  // Check if the user's guess matches the random number
+  if (userGuess === randomNumber) {
+    // Redirect to the congratulations page
+    window.location.href = "congratulations.html";
+  } else {
+    // Decrement the number of attempts left
+    attempts--;
+
+    // Check if the user has any attempts left
+    if (attempts > 0) {
+      // Display a message indicating the number of attempts left
+      message.textContent = `Wrong! You have ${attempts} attempts left.`;
+    } else {
+      // Redirect to the sorry page
+      window.location.href = "sorry.html";
+    }
+  }
+}
+
+// Add an event listener to the submit button
+document.getElementById("Checkbtn").addEventListener("click", check);
+
+// Initialize the number of attempts
+let attempts = 10;
+
+// Display a message indicating the number of attempts left
+const message = document.getElementById("attemptCount");
+message.textContent = `You have ${attempts} attempts left.`;
+document.querySelector(".form").appendChild(message);
+    </script>
+</body>
+</html>
+
+
+congratulations.html:
+
+<!doctype html>
+<html>
+    <head>
+        <title>Congartulations</title>
+        <style>
+            h1{
+                text-align: center;
+                color:white;
+            }
+            .z{
+                background-color: white;
+                text-align: center;
+            }
+            body{
+    background:linear-gradient(45deg,pink,rgba(255, 166, 0, 0.507))
+}
+h2{
+    color:maroon;
+}
+img{
+ align-items: center;
+ height:100px;
+ width:100px;
+}
+        </style>
+    </head>
+    <body>
+        <h1><u>NUMBERTES</u></h1>
+        <div class="z">
+            <img src="https://thumbs.dreamstime.com/b/birthday-party-emoji-celebrate-emoticon-happy-face-hat-209738459.jpg">
+            <h2 >CONGRATS YOU HAVE WON THE GAME</h2>
+        </div>
+    </body>
+</html>
+
+sorry.html:
+
+<!doctype html>
+<html>
+    <head>
+        <title>Sorry</title>
+        <style>
+            h1{
+                text-align: center;
+                color:white;
+            }
+            .y{
+                background-color: white;
+                text-align: center;
+            }
+            body{
+    background:linear-gradient(45deg,pink,rgba(255, 166, 0, 0.507))
+}
+h2{
+    color:maroon;
+}
+img{
+ align-items: center;
+ height:100px;
+ width:100px;
+}
+        </style>
+    </head>
+    <body>
+        <h1><u>NUMBERTES</u></h1>
+        <div class="y">
+            <img src="https://media.istockphoto.com/id/1342014125/photo/sad-pensive-smiley-face.jpg?s=612x612&w=0&k=20&c=ZfXWMiYanr-0EmlUn4xz3N2Z7u_iPVXTbBL0MW3P0BI=">
+            <h2 >SORRY BETTER LUCK NEXT TIME</h2>
+        </div>
+    </body>
+
+

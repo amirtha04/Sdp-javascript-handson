@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia Viewer</title>
+    <style>
+         
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  #bgImage {
+    width: 100%;
+    height: 45%;
+  }
+  
+  #mainHeading {
+    position: relative;
+    top: -295px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  #formContainer {
+    position: relative;
+    top: -275px;
+    left: 475px;
+    text-align: left;
+    width: 500px;
+    height: 35px;
+    border-radius: 10px;
+  }
+  
+  #formContainer label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  #formContainer input[type="text"] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 5px #ccc;
+    background-color: beige;
+  }
+  
+  #addButton {
+    position: relative;
+    top: -35px;
+    left: 85%;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgb(225, 14, 144);
+    border-color: gainsboro;
+  }
+  
+  #heading1{
+    position: relative;
+    text-align: center;
+    top: -130px;
+  }
+  
+  #heading2 {
+    position: relative;
+    text-align: center;
+    top: -100px;
+    left:80px;
+    color: purple;
+  }
+  
+  #about{
+    position: relative;
+    top: -75px;
+    margin: 0 auto;
+    list-style: none;
+    width: 80%;
+  }
+  
+  #about li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #ccc;
+  }
+  
+  #about li:hover {
+    background-color: #ddd;
+  }
+  
+  #about li .deleteButton {
+    float: right;
+    margin-left: 10px;
+    padding: 5px 10px;
+  }
+  #resetButton{
+    position:absolute;
+    left:620px;
+  }
+body{
+    background-color: cadetblue;
+}
+    </style>
+</head>
+<body>
+    <img id="bgImage" src="https://c4.wallpaperflare.com/wallpaper/309/618/472/creative-background-texture-different-colors-wallpaper-preview.jpg" alt="Background Image">
+    <h1 id="mainHeading">My 2022 Bucket List</h1>
+    <div id="formContainer">
+      <label for="wish"></label>
+      <input type="text" id="wish" name="wish" placeholder="Enter your wish...">
+      <button type="button" id="addButton">Add</button>
+    </div>
+    <h2 id="heading1">Here's what you gotta do this year</h2>
+    <p id="heading2">Stop dreaming about your bucket list and start living it !!</p>
+    <ul id="about"></ul>
+    <button type="button" id="resetButton">Reset Bucket List</button>
+    <script>
+         // Select the required elements from the HTML DOM
+const formContainer = document.getElementById("formContainer");
+const wishInput = document.getElementById("wish");
+const addButton = document.getElementById("addButton");
+const emptyListMessage = document.getElementById("heading2");
+const bucketList = document.getElementById("about");
+const resetButton = document.getElementById("resetButton");
+
+// Create an empty array to hold the user's wishes
+let wishes = [];
+
+// Add an event listener to the Add button to add a new wish to the list
+addButton.addEventListener("click", function() {
+// Get the user's wish from the input field
+const newWish = wishInput.value;
+// Check if the input field is not empty
+if (newWish.trim() !== "") {
+// Add the new wish to the wishes array
+wishes.push(newWish);
+// Clear the input field
+wishInput.value = "";
+// Call the function to display the updated wish list
+displayWishes();
+}
+});
+
+// Add an event listener to the Reset button to clear the wish list
+resetButton.addEventListener("click", function() {
+// Clear the wishes array
+wishes = [];
+// Call the function to display the updated wish list
+displayWishes();
+});
+
+// Define a function to display the wish list
+function displayWishes() {
+// Check if the wishes array is empty
+if (wishes.length === 0) {
+// Show the empty list message
+emptyListMessage.style.display = "block";
+// Hide the bucket list
+bucketList.style.display = "none";
+} else {
+// Hide the empty list message
+emptyListMessage.style.display = "none";
+// Show the bucket list
+bucketList.style.display = "block";
+// Clear the previous list items from the bucket list
+bucketList.innerHTML = "";
+// Loop through the wishes array and add each wish as a list item to the bucket list
+for (let i = 0; i < wishes.length; i++) {
+const wish = wishes[i];
+const li = document.createElement("li");
+li.textContent = wish;
+const deleteButton = document.createElement("button");
+deleteButton.textContent = "Delete";
+deleteButton.classList.add("deleteButton");
+deleteButton.addEventListener("click", function() {
+// Remove the wish from the wishes array
+wishes.splice(i, 1);
+// Call the function to display the updated wish list
+displayWishes();
+});
+li.appendChild(deleteButton);
+bucketList.appendChild(li);
+}
+}
+}
+
+// Call the function to display the initial wish list
+displayWishes();
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+

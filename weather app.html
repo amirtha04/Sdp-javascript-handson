@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <style>
+        #grid1{
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+  
+input[type=text] {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  
+button {
+    background-color: purple;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+button:hover {
+    background-color: #45a049;
+  }
+  
+#grid2 {
+    margin-top: 2em;
+    font-size: 2em;
+  }
+
+
+body{
+    background-image:url("https://i.pinimg.com/736x/b8/93/ff/b893ffb85b82a1fe0287f220f2ceec2f.jpg");
+    background-size:cover;
+    height:100%;
+    width:100%;
+    
+}
+.image{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    height: 20vh;
+    width: 20wh;
+}
+#heading{
+    position: absolute;
+    top: 0px;
+    left: 33%;
+}
+.a{
+    background-color:palevioletred;
+    padding: 100px;
+    border-radius: 25px;
+    margin: 10px 100px;
+    text-align: center;
+}
+button{
+    padding: 10px 100px;
+    border-radius: 25px;
+    color:whitesmoke;
+    font-weight: bold;
+}
+input{
+    padding: 10px 100px;
+    border-radius: 25px;
+    background-color:pink;
+}
+.b{
+    color: green;
+    background-color: plum;
+    padding:0px 100px;
+    margin: 20px 300px;
+    border-radius: 25px;
+}
+#i{
+    margin: 10px 50px 10px -50px;
+}
+#h{
+    margin: 0px -40px 0px 100px;
+}
+#p{
+    margin: 0px 0px 0px 50px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <img src="https://images.emojiterra.com/openmoji/v13.1/512px/1f636-1f32b.png" class="image">
+        <h1 id="heading">WEATHER REPORT</h1>
+        <div class="a" id="grid1">
+           <input type="text" name="" id="textBox">
+                <button id="submitButton">SUBMIT</button>
+        </div>
+        <div id="grid2"class="b d-flex flex-row justify-content-center">
+           <img id="i" src="https://th.bing.com/th/id/R.566cb71f90ba621031cb26fd66fe3853?rik=yh%2bQdGeK8QO4cQ&riu=http%3a%2f%2fclipartmag.com%2fimages%2fanimated-rain-clouds-1.png&ehk=%2bQjgxNcI0ur5diEXZ5FO2JAmDTMmh8VDBBXU%2fz3NG4Y%3d&risl=&pid=ImgRaw&r=0" width="10%" height="10%">
+                <h1 id="p">Delhi</h1>
+                <h1 id="h">21.8°С</h1>
+        </div>
+    </div>
+    <script>
+         const apiKey = '995f1e089c59c653762877fb831930bb';
+const searchBtn = document.getElementById('submitButton');
+const cityInput = document.getElementById('textBox');
+const resultDiv = document.getElementById('grid2');
+
+function getWeather(city) {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    .then(response => response.json())
+    .then(data => {
+      const temp = Math.round(data.main.temp);
+      const description = data.weather[0].description;
+      const result = `Current temperature in ${data.name} is ${temp}&deg;C with ${description}.`;
+      resultDiv.innerHTML = result;
+    })
+    .catch(error => {
+      console.error(error);
+      resultDiv.innerHTML = 'Error fetching weather data.';
+    });
+}
+
+searchBtn.addEventListener('click', () => {
+  const city = cityInput.value.trim();
+  if (city) {
+    getWeather(city);
+  }
+});
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
